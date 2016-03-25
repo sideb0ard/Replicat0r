@@ -36,20 +36,6 @@ int main(int argc, char **argv)
     close(fin);
     close(fout);
 
-    char execname[2+TIMESTAMPSIZE];
-    strncat(execname, "./", 2);
-    strncat(execname, outfilename, TIMESTAMPSIZE);
     sleep(3);
-    pid_t pid;
-    pid = fork ();
-    if (pid == 0) {
-        int retval = execl (execname, execname, NULL);
-        printf("AM THE WEAN - ret val %d\n", retval);
-        perror("WEANYERR");
-        _exit (EXIT_FAILURE);
-    } else if ( pid < 0 ) {
-        printf("Oooh, fork failure\n");
-    } else {
-        printf("Parent - signing off!\n");
-    }
+    execl (outfilename, outfilename, NULL);
 }
